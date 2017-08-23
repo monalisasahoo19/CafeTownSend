@@ -15,4 +15,4 @@ Functional automation testing of [cafeTOWNSEND] website.
 
   Monalisa Sahoo (monalisasahoo19@gmail.com)
   
-[dill]: <http://cafetownsend-angular-rails.herokuapp.com>
+[cafeTOWNSEND]: <http://cafetownsend-angular-rails.herokuapp.com>
