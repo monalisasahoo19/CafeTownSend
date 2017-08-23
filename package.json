@@ -1,0 +1,17 @@
+{
+  "name": "cafetownsend",
+  "version": "1.0.0",
+  "description": "Functional Tests CafeTownSend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Monalisa",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.1.1",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^3.5.0",
+    "protractor": "^5.1.2"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "login" : {
+    "validCredentials" : {
+      "userName" : "Luke",
+      "password" : "Skywalker"
+    },
+    "invalidCredentials" : {
+      "userName" : "Luke1",
+      "password" : "Skywalker2"
+    }
+  }
+}
