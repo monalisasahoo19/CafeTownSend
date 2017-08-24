@@ -9,15 +9,6 @@ class PageHelper {
 			return cls.includes(clsName);
 		});
 	}
-
-	/**
-	 * Convert the  delimited string to integer
-	 *
-	 * @return {int}
-	 */
-	static parseInt(commaDelimitedString) {
-		return commaDelimitedString ? parseInt(commaDelimitedString.trim().replace(/,/, '')) : 0;
-	}
 }
 
 module.exports = PageHelper;
