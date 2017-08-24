@@ -8,5 +8,11 @@
       "userName" : "Luke1",
       "password" : "Skywalker2"
     }
+  },
+  "create": {
+    "firstName" : "aaa",
+    "lastName" : "a0a",
+    "startDate" : "2017-01-01",
+    "email" : "aaa@aaa.com"
   }
 }

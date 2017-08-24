@@ -58,12 +58,30 @@ class LandingPage extends BasePage {
 	}
 
 	/**
+	 * Get the firstName input field
+	 *
+	 * @return {promise}
+	 */
+	static get inputFirstName() {
+		return element(by.model('selectedEmployee.firstName'));
+	}
+
+	/**
 	 * Get the lastName Label
 	 *
 	 * @return {promise}
 	 */
 	static get lastNameLabel() {
 		return element(by.css('body > div > div > div > form > fieldset > label:nth-child(4) > span'));
+	}
+
+	/**
+	 * Get the lastName input field
+	 *
+	 * @return {promise}
+	 */
+	static get inputLastName() {
+		return element(by.model('selectedEmployee.lastName'));
 	}
 
 	/**
@@ -76,6 +94,15 @@ class LandingPage extends BasePage {
 	}
 
 	/**
+	 * Get the StartDate input field
+	 *
+	 * @return {promise}
+	 */
+	static get inputStartDate() {
+		return element(by.model('selectedEmployee.startDate'));
+	}
+
+	/**
 	 * Get the Email Label
 	 *
 	 * @return {promise}
@@ -85,12 +112,31 @@ class LandingPage extends BasePage {
 	}
 
 	/**
+	 * Get the Email input field
+	 *
+	 * @return {promise}
+	 */
+	static get inputEmail() {
+		return element(by.model('selectedEmployee.email'));
+	}
+
+	/**
 	 * Get the Add Button
 	 *
 	 * @return {promise}
 	 */
 	static get addButton() {
 		return element(by.css('button[type="submit"]:nth-child(2)'));
+	}
+
+	/**
+	 * Get the list of employees
+	 *
+	 * @return {promise}
+	 */
+	static get listOfEmployees() {
+		return element.all(by.repeater('employee in employees'));
+
 	}
 }
 

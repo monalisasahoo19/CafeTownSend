@@ -5,11 +5,11 @@ chai.use(chaiAsPromised);
 const LoginPage = require('../tests/pageObjects/loginPage');
 const LandingPage = require('../tests/pageObjects/landingPage');
 const TestData = require('./testData/testData.json');
-const AssertHelper = require('../common/AssertHelper');
+const AssertHelper = require('../common/PageHelper');
 
-describe.only('CafeTownSend Landing/Private Home Page', () => {
+describe.only('CafeTownSend Landing Page', () => {
 
-	describe('Given the user is logged in and on the Private Home Page', () => {
+	describe('Given the user is logged in and is on the landing Page', () => {
 		let loginPage;
 		before(() => {
 			loginPage = new LoginPage(browser, expect);
@@ -43,15 +43,35 @@ describe.only('CafeTownSend Landing/Private Home Page', () => {
 
 		});
 
-		it('should display the edit button', () => {
+		it('should display the employee list', () => {
+			expect(LandingPage.listOfEmployees.count()).to.eventually.be.above(0);
+		});
+
+		it('should display the "Edit" button', () => {
 			expect(LandingPage.editButton.isDisplayed()).to.eventually.be.true;
 		});
 
-		it('should edit button be disabled', () => {
+		it('should "Edit" button be disabled', () => {
 			expect(AssertHelper.assertClass(LandingPage.editButton, 'disabled')).to.eventually.be.true;
 		});
 
-		describe('Given the user details are known create a customer', () => {
+		it('should display the "Delete" button', () => {
+			expect(LandingPage.deleteButton.isDisplayed()).to.eventually.be.true;
+		});
+
+		it('should "Delete" button be disabled', () => {
+			expect(AssertHelper.assertClass(LandingPage.deleteButton, 'disabled')).to.eventually.be.true;
+		});
+
+		describe('When user clicks on the create button', () => {
+
+			let currentEmployeeCount;
+			before(() => {
+				LandingPage.listOfEmployees.then((employees) => {
+					currentEmployeeCount = employees.length;
+				});
+			});
+
 			before(() => {
 				LandingPage.createButton.click();
 			});
@@ -74,7 +94,19 @@ describe.only('CafeTownSend Landing/Private Home Page', () => {
 
 			it('should display Add Button', () => {
 				expect(LandingPage.addButton.isDisplayed()).to.eventually.be.true;
-				expect(LandingPage.addButton.getText()).to.eventually.equal('Add');
+			});
+
+			describe('When user clicks on Add button to create the employee', () => {
+				before(() => {
+					LandingPage.inputFirstName.sendKeys(TestData.create.firstName);
+					LandingPage.inputLastName.sendKeys(TestData.create.lastName);
+					LandingPage.inputStartDate.sendKeys(TestData.create.startDate);
+					LandingPage.inputEmail.sendKeys(TestData.create.email);
+					LandingPage.addButton.click();
+				});
+				it('should create an employee successfully', () => {
+					expect(LandingPage.listOfEmployees.count()).to.eventually.equal(currentEmployeeCount + 1);
+				});
 			});
 		});
 	});
