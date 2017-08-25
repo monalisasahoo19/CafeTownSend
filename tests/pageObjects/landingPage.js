@@ -54,7 +54,7 @@ class LandingPage extends BasePage {
 	 * @return {promise}
 	 */
 	static get firstNameLabel() {
-		return element(by.css('body > div > div > div > form > fieldset > label:nth-child(3) > span'));
+		return element(by.css('form[name="employeeForm"] label:nth-child(3) > span'));
 	}
 
 	/**
@@ -72,7 +72,7 @@ class LandingPage extends BasePage {
 	 * @return {promise}
 	 */
 	static get lastNameLabel() {
-		return element(by.css('body > div > div > div > form > fieldset > label:nth-child(4) > span'));
+		return element(by.css('form[name="employeeForm"] label:nth-child(4) > span'));
 	}
 
 	/**
@@ -90,7 +90,7 @@ class LandingPage extends BasePage {
 	 * @return {promise}
 	 */
 	static get startDateLabel() {
-		return element(by.css('body > div > div > div > form > fieldset > label:nth-child(5) > span'));
+		return element(by.css('form[name="employeeForm"] label:nth-child(5) > span'));
 	}
 
 	/**
