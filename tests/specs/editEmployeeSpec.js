@@ -2,14 +2,11 @@ const chai = require('chai');
 const expect = chai.expect;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
-const LoginPage = require('../tests/pageObjects/loginPage');
-const LandingPage = require('../tests/pageObjects/landingPage');
-const TestData = require('./testData/testData.json');
-const AssertHelper = require('../common/PageHelper');
-const CSS_INVALID = 'ng-invalid';
-const CSS_VALID = 'ng-valid';
+const LoginPage = require('../pageObjects/loginPage');
+const LandingPage = require('../pageObjects/landingPage');
+const TestData = require('../testData/testData.json');
 
-describe.only('CafeTownSend Edit Employee Page', () => {
+describe('CafeTownSend Edit Employee Page', () => {
 
 	describe('Given the user is logged in and on the landing Page', () => {
 		let loginPage;
@@ -28,14 +25,11 @@ describe.only('CafeTownSend Edit Employee Page', () => {
 			return LandingPage.helloMessage.isPresent();
 		});
 
-		describe('When user clicks on the edit button', () => {
+		after(() => {
+			return LandingPage.logoutButton.click();
+		});
 
-			let currentEmployeeCount;
-			before(() => {
-				LandingPage.listOfEmployees.then((employees) => {
-					currentEmployeeCount = employees.length;
-				});
-			});
+		describe('When user clicks on the edit button', () => {
 
 			before(() => {
 				// Search the first employee details created using firstname and lastname
@@ -73,6 +67,47 @@ describe.only('CafeTownSend Edit Employee Page', () => {
 
 			it('should display Delete Button', () => {
 				expect(LandingPage.deleteButtonFooter.getText()).to.eventually.equal('Delete');
+			});
+
+			describe('When user clicks on the update button', () => {
+
+				before(() => {
+					LandingPage.inputEmail.clear();
+					LandingPage.inputEmail.sendKeys(TestData.update.email);
+					LandingPage.updateButtonFooter.click();
+				});
+
+				it('should display the employee list on success', () => {
+					expect(LandingPage.employeeListElement.isDisplayed()).to.eventually.be.true;
+				});
+			});
+
+			describe('When user clicks on the delete button', () => {
+
+				let currentEmployeeFullName;
+				before(() => {
+					// Search the first employee details created using firstName and lastName
+					currentEmployeeFullName = TestData.create.firstName+' '+TestData.create.lastName;
+					let elem= LandingPage.employeeRowsByName(currentEmployeeFullName);
+					elem.get(0).click();
+					LandingPage.editButton.click();
+				});
+
+				before(() => {
+				    LandingPage.deleteButtonFooter.click();
+				});
+
+				it('should display the pop up message', () => {
+
+					var alertDialog = browser.switchTo().alert();
+
+					console.log(currentEmployeeFullName);
+
+					expect(alertDialog.getText()).to.eventually.equal('Are you sure you want to delete '+currentEmployeeFullName+'?');
+
+					alertDialog.accept();
+				});
+
 			});
 
 		});

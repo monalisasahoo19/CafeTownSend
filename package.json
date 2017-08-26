@@ -12,6 +12,7 @@
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "mocha": "^3.5.0",
+    "mochawesome-screenshots": "^1.5.3",
     "protractor": "^5.1.2"
   }
 }

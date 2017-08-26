@@ -2,10 +2,10 @@ const chai = require('chai');
 const expect = chai.expect;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
-const LoginPage = require('../tests/pageObjects/loginPage');
-const LandingPage = require('../tests/pageObjects/landingPage');
-const TestData = require('./testData/testData.json');
-const AssertHelper = require('../common/PageHelper');
+const LoginPage = require('../pageObjects/loginPage');
+const LandingPage = require('../pageObjects/landingPage');
+const TestData = require('../testData/testData.json');
+const AssertHelper = require('../../common/PageHelper');
 const CSS_INVALID = 'ng-invalid';
 const CSS_VALID = 'ng-valid';
 
@@ -27,6 +27,11 @@ describe('CafeTownSend Create Employee Page', () => {
 		before(() => {
 			return LandingPage.helloMessage.isPresent();
 		});
+
+		after(() => {
+			return LandingPage.logoutButton.click();
+		});
+
 		describe('When user clicks on the create button', () => {
 
 			let currentEmployeeCount;

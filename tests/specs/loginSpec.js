@@ -2,9 +2,9 @@ const chai = require('chai');
 const expect = chai.expect;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
-const LoginPage = require('../tests/pageObjects/loginPage');
-const LandingPage = require('../tests/pageObjects/landingPage');
-const TestData = require('./testData/testData.json');
+const LoginPage = require('../pageObjects/loginPage');
+const LandingPage = require('../pageObjects/landingPage');
+const TestData = require('../testData/testData.json');
 
 describe('CafeTownSend Login', () => {
 
@@ -42,7 +42,6 @@ describe('CafeTownSend Login', () => {
 					});
 					it('should highlight the userName input field as required', () => {
 						LoginPage.inputUsername.getAttribute('class').then((cls) => {
-							console.log(cls);
 							expect(cls).to.include('ng-invalid');
 						});
 					});
@@ -119,8 +118,18 @@ describe('CafeTownSend Login', () => {
 					expect(LandingPage.helloMessage.getText()).to.eventually.equal('Hello ' + TestData.login.validCredentials.userName);
 				});
 
-			});
+				describe('When user clicks on the logout button', () => {
+					before(() => {
+						LandingPage.logoutButton.click();
+					});
 
+					it('should display the username label', () => {
+					    expect(LoginPage.labelUsername.getText()).to.eventually.equal('Username*');
+					});
+
+				});
+
+			});
 		});
 
 	});
