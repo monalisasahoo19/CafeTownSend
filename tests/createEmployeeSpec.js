@@ -1,0 +1,156 @@
+const chai = require('chai');
+const expect = chai.expect;
+const chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
+const LoginPage = require('../tests/pageObjects/loginPage');
+const LandingPage = require('../tests/pageObjects/landingPage');
+const TestData = require('./testData/testData.json');
+const AssertHelper = require('../common/PageHelper');
+const CSS_INVALID = 'ng-invalid';
+const CSS_VALID = 'ng-valid';
+
+describe('CafeTownSend Create Employee Page', () => {
+
+	describe('Given the user is logged in and on the landing Page', () => {
+		let loginPage;
+		before(() => {
+			loginPage = new LoginPage(browser, expect);
+			loginPage.open();
+		});
+
+		before(() => {
+			LoginPage.inputUsername.sendKeys(TestData.login.validCredentials.userName);
+			LoginPage.inputPassword.sendKeys(TestData.login.validCredentials.password);
+			LoginPage.btnLogin.click();
+		});
+
+		before(() => {
+			return LandingPage.helloMessage.isPresent();
+		});
+		describe('When user clicks on the create button', () => {
+
+			let currentEmployeeCount;
+			before(() => {
+				LandingPage.listOfEmployees.then((employees) => {
+					currentEmployeeCount = employees.length;
+					console.log(currentEmployeeCount);
+				});
+			});
+
+			before(() => {
+				LandingPage.createButton.click();
+			});
+
+			it('should display the First name label', () => {
+				expect(LandingPage.firstNameLabel.getText()).to.eventually.equal('First name:');
+			});
+
+			it('should display the Last name label', () => {
+				expect(LandingPage.lastNameLabel.getText()).to.eventually.equal('Last name:');
+			});
+
+			it('should display the Start date label', () => {
+				expect(LandingPage.startDateLabel.getText()).to.eventually.equal('Start date:');
+			});
+
+			it('should display the Email label', () => {
+				expect(LandingPage.emailLabel.getText()).to.eventually.equal('Email:');
+			});
+
+			it('should display Add Button', () => {
+				expect(LandingPage.addButton.isDisplayed()).to.eventually.be.true;
+			});
+
+			describe('When user clicks on Add button to create the employee', () => {
+				before(() => {
+					LandingPage.inputFirstName.sendKeys(TestData.create.firstName);
+					LandingPage.inputLastName.sendKeys(TestData.create.lastName);
+					LandingPage.inputStartDate.sendKeys(TestData.create.startDate);
+					LandingPage.inputEmail.sendKeys(TestData.create.email);
+					LandingPage.addButton.click();
+				});
+				it('should create an employee details successfully', () => {
+					expect(LandingPage.listOfEmployees.count()).to.eventually.equal(currentEmployeeCount + 1);
+				});
+			});
+
+			describe('When user clicks on Add button with missing inputs', () => {
+				before(() => {
+					LandingPage.createButton.click();
+				});
+
+				describe('When first name is not entered', () => {
+					before(() => {
+						LandingPage.inputFirstName.click();
+						LandingPage.addButton.click();
+					});
+					it('should display the required field validation when first name is not entered', () => {
+						expect(AssertHelper.assertClass(LandingPage.inputFirstName, CSS_INVALID)).to.eventually.be.true;
+					});
+					it('should not display required field validation when first name is entered', () => {
+						LandingPage.inputFirstName.sendKeys(TestData.create.firstName);
+						expect(AssertHelper.assertClass(LandingPage.inputFirstName, CSS_VALID)).to.eventually.be.true;
+					});
+				});
+
+				describe('When last name is not entered', () => {
+					before(() => {
+						LandingPage.inputLastName.click();
+						LandingPage.addButton.click();
+					});
+					it('should display the required field validation when last name is not entered', () => {
+						expect(AssertHelper.assertClass(LandingPage.inputLastName, CSS_INVALID)).to.eventually.be.true;
+					});
+					it('should not display required field validation when last name is entered', () => {
+						LandingPage.inputLastName.sendKeys(TestData.create.lastName);
+						expect(AssertHelper.assertClass(LandingPage.inputLastName, CSS_VALID)).to.eventually.be.true;
+					});
+				});
+
+				describe('When start date is not entered', () => {
+					before(() => {
+						LandingPage.inputStartDate.click();
+						LandingPage.addButton.click();
+					});
+					it('should display the required field validation when start date is not entered', () => {
+						expect(AssertHelper.assertClass(LandingPage.inputStartDate, CSS_INVALID)).to.eventually.be.true;
+					});
+					it('should not display required field validation when start date is entered', () => {
+						LandingPage.inputStartDate.sendKeys(TestData.create.startDate);
+						expect(AssertHelper.assertClass(LandingPage.inputStartDate, CSS_VALID)).to.eventually.be.true;
+					});
+				});
+
+				describe('When email is not entered', () => {
+					before(() => {
+						LandingPage.inputEmail.click();
+						LandingPage.addButton.click();
+					});
+					it('should display the required field validation when email is not entered', () => {
+						expect(AssertHelper.assertClass(LandingPage.inputEmail, CSS_INVALID)).to.eventually.be.true;
+					});
+					it('should not display required field validation when email is entered', () => {
+						LandingPage.inputEmail.sendKeys(TestData.create.email);
+						expect(AssertHelper.assertClass(LandingPage.inputEmail, CSS_VALID)).to.eventually.be.true;
+					});
+				});
+			});
+
+			describe('When user click on cancel button', () => {
+
+				before(() => {
+					LandingPage.cancelButton.click();
+				});
+
+				it('should navigate back to the employee list', () => {
+					expect(LandingPage.employeeListElement.isDisplayed()).to.eventually.be.true;
+				});
+
+				it('should display the create button', () => {
+					expect(LandingPage.createButton.isDisplayed()).to.eventually.be.true;
+				});
+			});
+		});
+	});
+
+});

@@ -7,9 +7,9 @@ const LandingPage = require('../tests/pageObjects/landingPage');
 const TestData = require('./testData/testData.json');
 const AssertHelper = require('../common/PageHelper');
 
-describe.only('CafeTownSend Landing Page', () => {
+describe('CafeTownSend Landing Page', () => {
 
-	describe('Given the user is logged in and is on the landing Page', () => {
+	describe('Given the user is logged in and on the landing Page', () => {
 		let loginPage;
 		before(() => {
 			loginPage = new LoginPage(browser, expect);
@@ -40,7 +40,6 @@ describe.only('CafeTownSend Landing Page', () => {
 		it('should create button be enabled', () => {
 			expect(LandingPage.createButton.isEnabled()).to.eventually.be.true;
 			expect(AssertHelper.assertClass(LandingPage.createButton, 'disabled')).to.eventually.be.false;
-
 		});
 
 		it('should display the employee list', () => {
@@ -63,52 +62,6 @@ describe.only('CafeTownSend Landing Page', () => {
 			expect(AssertHelper.assertClass(LandingPage.deleteButton, 'disabled')).to.eventually.be.true;
 		});
 
-		describe('When user clicks on the create button', () => {
-
-			let currentEmployeeCount;
-			before(() => {
-				LandingPage.listOfEmployees.then((employees) => {
-					currentEmployeeCount = employees.length;
-				});
-			});
-
-			before(() => {
-				LandingPage.createButton.click();
-			});
-
-			it('should display the First name label', () => {
-				expect(LandingPage.firstNameLabel.getText()).to.eventually.equal('First name:');
-			});
-
-			it('should display the Last name label', () => {
-				expect(LandingPage.lastNameLabel.getText()).to.eventually.equal('Last name:');
-			});
-
-			it('should display the Start date label', () => {
-				expect(LandingPage.startDateLabel.getText()).to.eventually.equal('Start date:');
-			});
-
-			it('should display the Email label', () => {
-				expect(LandingPage.emailLabel.getText()).to.eventually.equal('Email:');
-			});
-
-			it('should display Add Button', () => {
-				expect(LandingPage.addButton.isDisplayed()).to.eventually.be.true;
-			});
-
-			describe('When user clicks on Add button to create the employee', () => {
-				before(() => {
-					LandingPage.inputFirstName.sendKeys(TestData.create.firstName);
-					LandingPage.inputLastName.sendKeys(TestData.create.lastName);
-					LandingPage.inputStartDate.sendKeys(TestData.create.startDate);
-					LandingPage.inputEmail.sendKeys(TestData.create.email);
-					LandingPage.addButton.click();
-				});
-				it('should create an employee successfully', () => {
-					expect(LandingPage.listOfEmployees.count()).to.eventually.equal(currentEmployeeCount + 1);
-				});
-			});
-		});
 	});
 
 });

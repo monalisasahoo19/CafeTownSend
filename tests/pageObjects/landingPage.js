@@ -11,14 +11,13 @@ class LandingPage extends BasePage {
 		return element(by.id('greetings'));
 	}
 
-
 	/**
 	 * Get the logout button
 	 *
 	 * @return {promise}
 	 */
 	static get logoutButton() {
-		return element(by.css('p.main-button'));
+		return element(by.css('div.header-container > p.main-button'));
 	}
 
 	/**
@@ -49,9 +48,27 @@ class LandingPage extends BasePage {
 	}
 
 	/**
-	 * Get the firstName Label
+	 * Get the cancel button
 	 *
 	 * @return {promise}
+	 */
+	static get cancelButton() {
+		return element(by.css('a.subButton.bCancel'));
+	}
+
+	/**
+	 * Get the back button
+	 *
+	 * @return {promise}
+	 */
+	static get backButton() {
+		return element(by.css('a.subButton.bBack'));
+	}
+
+	/**
+	 * Get the firstName Label
+	 *
+	 * @return {string}
 	 */
 	static get firstNameLabel() {
 		return element(by.css('form[name="employeeForm"] label:nth-child(3) > span'));
@@ -60,7 +77,7 @@ class LandingPage extends BasePage {
 	/**
 	 * Get the firstName input field
 	 *
-	 * @return {promise}
+	 * @return {element}
 	 */
 	static get inputFirstName() {
 		return element(by.model('selectedEmployee.firstName'));
@@ -69,7 +86,7 @@ class LandingPage extends BasePage {
 	/**
 	 * Get the lastName Label
 	 *
-	 * @return {promise}
+	 * @return {string}
 	 */
 	static get lastNameLabel() {
 		return element(by.css('form[name="employeeForm"] label:nth-child(4) > span'));
@@ -87,7 +104,7 @@ class LandingPage extends BasePage {
 	/**
 	 * Get the StartDate Label
 	 *
-	 * @return {promise}
+	 * @return {string}
 	 */
 	static get startDateLabel() {
 		return element(by.css('form[name="employeeForm"] label:nth-child(5) > span'));
@@ -105,10 +122,10 @@ class LandingPage extends BasePage {
 	/**
 	 * Get the Email Label
 	 *
-	 * @return {promise}
+	 * @return {string}
 	 */
 	static get emailLabel() {
-		return element(by.css('body > div > div > div > form > fieldset > label:nth-child(6) > span'));
+		return element(by.css('form[name="employeeForm"] label:nth-child(6) > span'));
 	}
 
 	/**
@@ -130,13 +147,52 @@ class LandingPage extends BasePage {
 	}
 
 	/**
+	 * Get the footer Update Button
+	 *
+	 * @return {promise}
+	 */
+	static get updateButtonFooter() {
+		return element(by.css('button[type="submit"]:nth-child(1)'));
+	}
+
+	/**
+	 * Get the footer Delete Button
+	 *
+	 * @return {promise}
+	 */
+	static get deleteButtonFooter() {
+		return element(by.css('div.formFooter > p.main-button'));
+	}
+
+	/**
 	 * Get the list of employees
 	 *
 	 * @return {promise}
 	 */
 	static get listOfEmployees() {
 		return element.all(by.repeater('employee in employees'));
+	}
 
+	/**
+	 * Get the DOM element for the list of employees
+	 *
+	 * @return {promise}
+	 */
+	static get employeeListElement() {
+		return element(by.id('employee-list'));
+	}
+
+	/**
+	 * Get employee by name
+	 *
+	 * @return {promise}
+	 */
+	static employeeRowsByName(filterText) {
+		return this.listOfEmployees.filter((item) => {
+			return item.getText().then((label) => {
+				 return (label === filterText);
+			});
+		});
 	}
 }
 

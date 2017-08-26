@@ -78,7 +78,7 @@ describe('CafeTownSend Login', () => {
 							});
 						});
 					});
-				})
+				});
 
 				after(() => {
 					LoginPage.inputUsername.clear();
