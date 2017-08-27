@@ -11,17 +11,11 @@ class LoginAction {
 	}
 
 	static loginWithValidCredentials() {
-
-		LoginPage.inputUsername.sendKeys(TestData.login.validCredentials.userName);
-		LoginPage.inputPassword.sendKeys(TestData.login.validCredentials.password);
-		LoginPage.btnLogin.click();
+		this.loginWithInput(TestData.login.validCredentials.userName,TestData.login.validCredentials.password);
 	}
 
 	static loginWithInvalidCredentials() {
-
-		LoginPage.inputUsername.sendKeys(TestData.login.invalidCredentials.userName);
-		LoginPage.inputPassword.sendKeys(TestData.login.invalidCredentials.password);
-		LoginPage.btnLogin.click();
+		this.loginWithInput(TestData.login.invalidCredentials.userName,TestData.login.invalidCredentials.password);
 	}
 
 	static loginWithInput (userName,password) {
