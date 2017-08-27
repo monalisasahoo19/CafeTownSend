@@ -5,23 +5,18 @@ chai.use(chaiAsPromised);
 const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
-const AssertHelper = require('../../common/PageHelper');
+const AssertHelper = require('../common/PageHelper');
+const LoginAction = require('../actions/loginAction');
+
 const CSS_INVALID = 'ng-invalid';
 const CSS_VALID = 'ng-valid';
 
 describe('CafeTownSend Create Employee Page', () => {
 
 	describe('Given the user is logged in and on the landing Page', () => {
-		let loginPage;
-		before(() => {
-			loginPage = new LoginPage(browser, expect);
-			loginPage.open();
-		});
 
 		before(() => {
-			LoginPage.inputUsername.sendKeys(TestData.login.validCredentials.userName);
-			LoginPage.inputPassword.sendKeys(TestData.login.validCredentials.password);
-			LoginPage.btnLogin.click();
+			return LoginAction.login();
 		});
 
 		before(() => {
@@ -38,7 +33,6 @@ describe('CafeTownSend Create Employee Page', () => {
 			before(() => {
 				LandingPage.listOfEmployees.then((employees) => {
 					currentEmployeeCount = employees.length;
-					console.log(currentEmployeeCount);
 				});
 			});
 

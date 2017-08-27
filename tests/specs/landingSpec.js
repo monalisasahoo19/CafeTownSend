@@ -5,21 +5,15 @@ chai.use(chaiAsPromised);
 const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
-const AssertHelper = require('../../common/PageHelper');
+const AssertHelper = require('../common/PageHelper');
+const LoginAction = require('../actions/loginAction');
 
 describe('CafeTownSend Landing Page', () => {
 
 	describe('Given the user is logged in and on the landing Page', () => {
-		let loginPage;
-		before(() => {
-			loginPage = new LoginPage(browser, expect);
-			loginPage.open();
-		});
 
 		before(() => {
-			LoginPage.inputUsername.sendKeys(TestData.login.validCredentials.userName);
-			LoginPage.inputPassword.sendKeys(TestData.login.validCredentials.password);
-			LoginPage.btnLogin.click();
+			return LoginAction.login();
 		});
 
 		before(() => {
