@@ -1,4 +1,3 @@
-
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
 

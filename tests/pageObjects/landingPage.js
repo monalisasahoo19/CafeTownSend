@@ -77,7 +77,7 @@ class LandingPage extends BasePage {
 	/**
 	 * Get the firstName input field
 	 *
-	 * @return {element}
+	 * @return {promise}
 	 */
 	static get inputFirstName() {
 		return element(by.model('selectedEmployee.firstName'));

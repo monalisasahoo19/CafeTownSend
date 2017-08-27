@@ -1,4 +1,3 @@
-
 const LoginPage = require('../pageObjects/loginPage');
 const TestData = require('../testData/testData.json');
 

@@ -62,8 +62,7 @@ describe('CafeTownSend Delete Employee Page', () => {
 
 			it('should display the pop up message', () => {
 
-				var alertDialog = browser.switchTo().alert();
-
+				let alertDialog = browser.switchTo().alert();
 
 				expect(alertDialog.getText()).to.eventually.equal('Are you sure you want to delete '+currentEmployeeFullName+'?');
 
@@ -75,10 +74,8 @@ describe('CafeTownSend Delete Employee Page', () => {
 			it('should the deleted employee have been removed from the list', () => {
 
 				LandingPage.listOfEmployees.then((employees) => {
+
 					let currentEmployeeCount = employees.length;
-
-					console.log("currentEmployeeCount "+currentEmployeeCount);
-
 					expect(currentEmployeeCount).to.equal(previousEmployeeCount-1);
 
 				});

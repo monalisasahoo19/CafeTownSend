@@ -20,7 +20,6 @@ class LoginPage extends BasePage {
 		return '/login';
 	}
 
-
 	/**
 	 * Get the username label
 	 *
@@ -69,12 +68,11 @@ class LoginPage extends BasePage {
 	/**
 	 * Get the error message paragraph
 	 *
-	 * @return {promise}
+	 * @return {string}
 	 */
 	static get headerErrorMessage() {
 		return element(by.css('p.error-message'));
 	}
-
 }
 
 module.exports = LoginPage;
