@@ -2,8 +2,8 @@ const chai = require('chai');
 const expect = chai.expect;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
-const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
+const CommonAssertions = require('../common/commonAssertions');
 const TestData = require('../testData/testData.json');
 const LoginAction = require('../actions/loginAction');
 
@@ -35,25 +35,14 @@ describe('CafeTownSend Edit Employee Page', () => {
 				LandingPage.editButton.click();
 			});
 
+			describe('When user is on the edit form should display the labels', () => {
+				CommonAssertions.assertCreateUpdateLabels();
+			});
+
 			it('should display Back Button', () => {
 				expect(LandingPage.backButton.getText()).to.eventually.equal('Back');
 			});
 
-			it('should display the First name label', () => {
-				expect(LandingPage.firstNameLabel.getText()).to.eventually.equal('First name:');
-			});
-
-			it('should display the Last name label', () => {
-				expect(LandingPage.lastNameLabel.getText()).to.eventually.equal('Last name:');
-			});
-
-			it('should display the Start date label', () => {
-				expect(LandingPage.startDateLabel.getText()).to.eventually.equal('Start date:');
-			});
-
-			it('should display the Email label', () => {
-				expect(LandingPage.emailLabel.getText()).to.eventually.equal('Email:');
-			});
 
 			it('should display Update Button', () => {
 				expect(LandingPage.updateButtonFooter.getText()).to.eventually.equal('Update');
@@ -62,6 +51,7 @@ describe('CafeTownSend Edit Employee Page', () => {
 			it('should display Delete Button', () => {
 				expect(LandingPage.deleteButtonFooter.getText()).to.eventually.equal('Delete');
 			});
+
 
 			describe('When user clicks on the update button', () => {
 

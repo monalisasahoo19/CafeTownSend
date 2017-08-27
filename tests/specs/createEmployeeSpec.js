@@ -6,13 +6,14 @@ const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
 const AssertHelper = require('../common/PageHelper');
+const CommonAssertions = require('../common/commonAssertions');
 const LoginAction = require('../actions/loginAction');
 const LandingPageAction = require('../actions/landingPageAction');
 
 const CSS_INVALID = 'ng-invalid';
 const CSS_VALID = 'ng-valid';
 
-describe.only('CafeTownSend Create Employee Page', () => {
+describe('CafeTownSend Create Employee Page', () => {
 
 	describe('Given the user is logged in and on the landing Page', () => {
 
@@ -41,20 +42,8 @@ describe.only('CafeTownSend Create Employee Page', () => {
 				LandingPage.createButton.click();
 			});
 
-			it('should display the First name label', () => {
-				expect(LandingPage.firstNameLabel.getText()).to.eventually.equal('First name:');
-			});
-
-			it('should display the Last name label', () => {
-				expect(LandingPage.lastNameLabel.getText()).to.eventually.equal('Last name:');
-			});
-
-			it('should display the Start date label', () => {
-				expect(LandingPage.startDateLabel.getText()).to.eventually.equal('Start date:');
-			});
-
-			it('should display the Email label', () => {
-				expect(LandingPage.emailLabel.getText()).to.eventually.equal('Email:');
+			describe('When user is on the create form should display the labels', () => {
+				CommonAssertions.assertCreateUpdateLabels();
 			});
 
 			it('should display Add Button', () => {
