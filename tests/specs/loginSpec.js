@@ -11,7 +11,7 @@ const LoginAction = require('../actions/loginAction');
 const CSS_INVALID = 'ng-invalid';
 const CSS_VALID = 'ng-valid';
 
-describe.only('CafeTownSend Login', () => {
+describe('CafeTownSend Login', () => {
 
 	describe('Given CafeTownSend Login Page', () => {
 		let loginPage;

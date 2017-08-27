@@ -2,7 +2,6 @@ const chai = require('chai');
 const expect = chai.expect;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
-const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
 const AssertHelper = require('../common/PageHelper');

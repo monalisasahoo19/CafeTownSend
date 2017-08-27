@@ -7,11 +7,12 @@ const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
 const AssertHelper = require('../common/PageHelper');
 const LoginAction = require('../actions/loginAction');
+const LandingPageAction = require('../actions/landingPageAction');
 
 const CSS_INVALID = 'ng-invalid';
 const CSS_VALID = 'ng-valid';
 
-describe('CafeTownSend Create Employee Page', () => {
+describe.only('CafeTownSend Create Employee Page', () => {
 
 	describe('Given the user is logged in and on the landing Page', () => {
 
@@ -62,11 +63,7 @@ describe('CafeTownSend Create Employee Page', () => {
 
 			describe('When user clicks on Add button to create the employee', () => {
 				before(() => {
-					LandingPage.inputFirstName.sendKeys(TestData.create.firstName);
-					LandingPage.inputLastName.sendKeys(TestData.create.lastName);
-					LandingPage.inputStartDate.sendKeys(TestData.create.startDate);
-					LandingPage.inputEmail.sendKeys(TestData.create.email);
-					LandingPage.addButton.click();
+					LandingPageAction.createEmployee();
 				});
 				it('should create an employee details successfully', () => {
 					expect(LandingPage.listOfEmployees.count()).to.eventually.equal(currentEmployeeCount + 1);
