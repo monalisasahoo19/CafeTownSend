@@ -4,11 +4,9 @@ class BasePage {
 	 * Constructor
 	 *
 	 * @param {Browser} browser
-	 * @param {expect}  expect
 	 */
-	constructor(browser, expect) {
+	constructor(browser) {
 		this.browser = browser;
-		this.expect = expect;
 
 		//process.env.INSTANCE should be injected from the CI Server
 		this.url = process.env.INSTANCE || this.baseUrl;

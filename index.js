@@ -15,8 +15,6 @@ describe("CafeTownSend Functional Tests", function () {
 	importTest("Edit Employee", './tests/specs/editEmployeeSpec');
 	importTest("Delete Employee", './tests/specs/deleteEmployeeSpec');
 
-
-
 	after(function () {
 		console.log("After all the tests");
 	});

@@ -1,12 +1,11 @@
-const chai = require('chai');
-const expect = chai.expect;
+
 const LoginPage = require('../pageObjects/loginPage');
 const TestData = require('../testData/testData.json');
 
 class LoginAction {
 
 	static login () {
-		let loginPage = new LoginPage(browser, expect);
+		let loginPage = new LoginPage(browser);
 		loginPage.open();
 
 		LoginPage.inputUsername.sendKeys(TestData.login.validCredentials.userName);

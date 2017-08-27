@@ -11,7 +11,7 @@ describe('CafeTownSend Login', () => {
 	describe('Given CafeTownSend Login Page', () => {
 		let loginPage;
 		before(() => {
-			loginPage = new LoginPage(browser, expect);
+			loginPage = new LoginPage(browser);
 			loginPage.open();
 		});
 
