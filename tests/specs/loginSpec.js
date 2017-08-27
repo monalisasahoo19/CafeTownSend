@@ -99,7 +99,7 @@ describe.only('CafeTownSend Login', () => {
 			describe('When user clicks on the initLogin button with invalid credentials', () => {
 
 				before(() => {
-					LoginAction.loginWithInput(TestData.login.invalidCredentials.userName,TestData.login.invalidCredentials.password);
+					LoginAction.loginWithInvalidCredentials();
 				});
 
 				it('should display the "Invalid username or password" message on initLogin failure', () => {
