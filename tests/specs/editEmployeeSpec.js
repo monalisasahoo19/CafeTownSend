@@ -3,8 +3,8 @@ const expect = chai.expect;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const LandingPage = require('../pageObjects/landingPage');
-const CommonAssertions = require('../common/commonAssertions');
 const TestData = require('../testData/testData.json');
+const CommonAssertions = require('../common/commonAssertions');
 const LoginAction = require('../actions/loginAction');
 
 describe('CafeTownSend Edit Employee Page', () => {
@@ -22,6 +22,11 @@ describe('CafeTownSend Edit Employee Page', () => {
 		after(() => {
 			return LandingPage.logoutButton.click();
 		});
+
+		describe('When the top banner is displayed', () => {
+			CommonAssertions.assertTopBanner();
+		});
+
 
 		describe('When user clicks on the edit button', () => {
 

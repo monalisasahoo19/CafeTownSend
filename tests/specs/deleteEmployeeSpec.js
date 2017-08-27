@@ -5,6 +5,8 @@ chai.use(chaiAsPromised);
 const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
+const CommonAssertions = require('../common/commonAssertions');
+const LandingPageAction = require('../actions/landingPageAction');
 const LoginAction = require('../actions/loginAction');
 
 describe('CafeTownSend Delete Employee Page', () => {
@@ -19,7 +21,19 @@ describe('CafeTownSend Delete Employee Page', () => {
 			return LandingPage.helloMessage.isPresent();
 		});
 
-		describe('When user clicks on the edit button on the given employee', () => {
+		describe('When the top banner is displayed', () => {
+			CommonAssertions.assertTopBanner();
+		});
+
+
+		//Create the employee then tear down in the following step
+		before(() => {
+			LandingPage.createButton.click();
+			LandingPageAction.createEmployee();
+
+		});
+
+		describe('When user clicks on the delete button on the given employee', () => {
 
 			let previousEmployeeCount;
 			let currentEmployeeFullName;
@@ -55,6 +69,8 @@ describe('CafeTownSend Delete Employee Page', () => {
 
 				alertDialog.accept();
 			});
+
+			//AssertionError: expected 1377 to equal 688 - This is a bug in the app
 
 			it('should the deleted employee have been removed from the list', () => {
 

@@ -3,6 +3,7 @@ const expect = chai.expect;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const LandingPage = require('../pageObjects/landingPage');
+const BasePage = require('../pageObjects/basePage');
 
 class CommonAssertions {
 
@@ -22,6 +23,22 @@ class CommonAssertions {
 
 		it('should display the Email label', () => {
 			expect(LandingPage.emailLabel.getText()).to.eventually.equal('Email:');
+		});
+	}
+
+	static assertTopBanner() {
+
+		it('should display the title as "CafeTownsend-AngularJS-Rails"', () => {
+			expect(browser.getTitle()).to.eventually.equal('CafeTownsend-AngularJS-Rails');
+		});
+
+		it('should display the banner with a background asset', () => {
+
+			expect(BasePage.mainDivWrapper.isPresent()).to.eventually.be.true;
+
+			return BasePage.mainDivWrapper.getCssValue("background-image").then((assetUrl) => {
+				return expect(assetUrl).to.include('.png');
+			});
 		});
 	}
 }

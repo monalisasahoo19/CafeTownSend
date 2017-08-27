@@ -5,6 +5,7 @@ chai.use(chaiAsPromised);
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
 const AssertHelper = require('../common/PageHelper');
+const CommonAssertions = require('../common/commonAssertions');
 const LoginAction = require('../actions/loginAction');
 
 describe('CafeTownSend Landing Page', () => {
@@ -21,6 +22,10 @@ describe('CafeTownSend Landing Page', () => {
 
 		after(() => {
 			return LandingPage.logoutButton.click();
+		});
+
+		describe('When the top banner is displayed', () => {
+			CommonAssertions.assertTopBanner();
 		});
 
 		it('should display the "Hello username" message on successful Login ', () => {

@@ -55,6 +55,14 @@ class BasePage {
 		return this.browser.getTitle();
 	}
 
+	/**
+	 * Get the top banner
+	 *
+	 * @return {promise}
+	 */
+	static get mainDivWrapper() {
+		return element(by.css('div.main-view-wrapper'));
+	}
 
 }
 

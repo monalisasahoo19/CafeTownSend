@@ -6,12 +6,13 @@ const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
 const AssertHelper = require('../common/PageHelper');
+const CommonAssertions = require('../common/commonAssertions');
 const LoginAction = require('../actions/loginAction');
 
 const CSS_INVALID = 'ng-invalid';
 const CSS_VALID = 'ng-valid';
 
-describe.only('CafeTownSend Login', () => {
+describe('CafeTownSend Login', () => {
 
 	describe('Given CafeTownSend Login Page', () => {
 		let loginPage;
@@ -21,16 +22,9 @@ describe.only('CafeTownSend Login', () => {
 		});
 
 		describe('When the Login page is loaded', () => {
-			it('should display the title as "CafeTownsend-AngularJS-Rails"', () => {
-				expect(browser.getTitle).to.eventually.equal('CafeTownsend-AngularJS-Rails');
-			});
-			it('should display the banner with a background asset', () => {
 
-				expect(LoginPage.mainDivWrapper.isPresent()).to.eventually.be.true;
-
-				return LoginPage.mainDivWrapper.getCssValue("background-image").then((assetUrl) => {
-					return expect(assetUrl).to.include('.png');
-				});
+			describe('When the top banner is displayed', () => {
+				CommonAssertions.assertTopBanner();
 			});
 
 			it('should display the username label', () => {

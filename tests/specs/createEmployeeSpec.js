@@ -6,8 +6,8 @@ const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
 const AssertHelper = require('../common/PageHelper');
-const CommonAssertions = require('../common/commonAssertions');
 const LoginAction = require('../actions/loginAction');
+const CommonAssertions = require('../common/commonAssertions');
 const LandingPageAction = require('../actions/landingPageAction');
 
 const CSS_INVALID = 'ng-invalid';
@@ -27,6 +27,10 @@ describe('CafeTownSend Create Employee Page', () => {
 
 		after(() => {
 			return LandingPage.logoutButton.click();
+		});
+
+		describe('When the top banner is displayed', () => {
+			CommonAssertions.assertTopBanner();
 		});
 
 		describe('When user clicks on the create button', () => {

@@ -20,14 +20,6 @@ class LoginPage extends BasePage {
 		return '/login';
 	}
 
-	/**
-	 * Get the top banner
-	 *
-	 * @return {promise}
-	 */
-	static get mainDivWrapper() {
-		return element(by.css('div.main-view-wrapper.main-view-wrapper-loggedIn'));
-	}
 
 	/**
 	 * Get the username label
