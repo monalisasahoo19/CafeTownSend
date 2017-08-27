@@ -24,6 +24,7 @@ describe('CafeTownSend Login', () => {
 		describe('When the Login page is loaded', () => {
 
 			describe('When the top banner is displayed', () => {
+				//Validates the top banner elements
 				CommonAssertions.assertTopBanner();
 			});
 
@@ -42,6 +43,7 @@ describe('CafeTownSend Login', () => {
 			describe('UserName and password field entry behaviour', () => {
 
 				describe('When the user clicks on the userName input field', () => {
+
 					before(() => {
 						LoginPage.inputUsername.click();
 					});
@@ -59,7 +61,6 @@ describe('CafeTownSend Login', () => {
 						it('should disappear the highlight ', () => {
 							expect(AssertHelper.assertClass(LoginPage.inputUsername, CSS_VALID)).to.eventually.be.true;
 						});
-
 					});
 				});
 
@@ -81,7 +82,6 @@ describe('CafeTownSend Login', () => {
 						it('should disappear the highlight ', () => {
 							expect(AssertHelper.assertClass(LoginPage.inputPassword, CSS_VALID)).to.eventually.be.true;
 						});
-
 					});
 				});
 
@@ -127,12 +127,8 @@ describe('CafeTownSend Login', () => {
 					it('should display the username label', () => {
 					    expect(LoginPage.labelUsername.getText()).to.eventually.equal('Username*');
 					});
-
 				});
-
 			});
 		});
-
 	});
-
 });

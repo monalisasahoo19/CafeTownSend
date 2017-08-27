@@ -63,7 +63,6 @@ class BasePage {
 	static get mainDivWrapper() {
 		return element(by.css('div.main-view-wrapper'));
 	}
-
 }
 
 module.exports = BasePage;

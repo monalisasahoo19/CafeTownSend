@@ -18,11 +18,9 @@ class LoginAction {
 	}
 
 	static loginWithInput (userName,password) {
-
 		LoginPage.inputUsername.sendKeys(userName);
 		LoginPage.inputPassword.sendKeys(password);
 		LoginPage.btnLogin.click();
-
 	}
 
 	static clearLoginEntries() {

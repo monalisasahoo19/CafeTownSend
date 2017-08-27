@@ -2,7 +2,6 @@ const chai = require('chai');
 const expect = chai.expect;
 const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
-const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
 const AssertHelper = require('../common/PageHelper');
@@ -46,36 +45,43 @@ describe('CafeTownSend Create Employee Page', () => {
 				LandingPage.createButton.click();
 			});
 
-			describe('When user is on the create form should display the labels', () => {
+			describe('When user is on the Create form should display the labels', () => {
+
 				CommonAssertions.assertCreateUpdateLabels();
+
+				it('should display Add Button', () => {
+					expect(LandingPage.addButton.isDisplayed()).to.eventually.be.true;
+				});
 			});
 
-			it('should display Add Button', () => {
-				expect(LandingPage.addButton.isDisplayed()).to.eventually.be.true;
-			});
+			describe('When user clicks on the Add button to create the employee', () => {
 
-			describe('When user clicks on Add button to create the employee', () => {
 				before(() => {
 					LandingPageAction.createEmployee();
 				});
+
 				it('should create an employee details successfully', () => {
 					expect(LandingPage.listOfEmployees.count()).to.eventually.equal(currentEmployeeCount + 1);
 				});
 			});
 
 			describe('When user clicks on Add button with missing inputs', () => {
+
 				before(() => {
 					LandingPage.createButton.click();
 				});
 
 				describe('When first name is not entered', () => {
+
 					before(() => {
 						LandingPage.inputFirstName.click();
 						LandingPage.addButton.click();
 					});
+
 					it('should display the required field validation when first name is not entered', () => {
 						expect(AssertHelper.assertClass(LandingPage.inputFirstName, CSS_INVALID)).to.eventually.be.true;
 					});
+
 					it('should not display required field validation when first name is entered', () => {
 						LandingPage.inputFirstName.sendKeys(TestData.create.firstName);
 						expect(AssertHelper.assertClass(LandingPage.inputFirstName, CSS_VALID)).to.eventually.be.true;
@@ -83,13 +89,16 @@ describe('CafeTownSend Create Employee Page', () => {
 				});
 
 				describe('When last name is not entered', () => {
+
 					before(() => {
 						LandingPage.inputLastName.click();
 						LandingPage.addButton.click();
 					});
+
 					it('should display the required field validation when last name is not entered', () => {
 						expect(AssertHelper.assertClass(LandingPage.inputLastName, CSS_INVALID)).to.eventually.be.true;
 					});
+
 					it('should not display required field validation when last name is entered', () => {
 						LandingPage.inputLastName.sendKeys(TestData.create.lastName);
 						expect(AssertHelper.assertClass(LandingPage.inputLastName, CSS_VALID)).to.eventually.be.true;
@@ -97,13 +106,16 @@ describe('CafeTownSend Create Employee Page', () => {
 				});
 
 				describe('When start date is not entered', () => {
+
 					before(() => {
 						LandingPage.inputStartDate.click();
 						LandingPage.addButton.click();
 					});
+
 					it('should display the required field validation when start date is not entered', () => {
 						expect(AssertHelper.assertClass(LandingPage.inputStartDate, CSS_INVALID)).to.eventually.be.true;
 					});
+
 					it('should not display required field validation when start date is entered', () => {
 						LandingPage.inputStartDate.sendKeys(TestData.create.startDate);
 						expect(AssertHelper.assertClass(LandingPage.inputStartDate, CSS_VALID)).to.eventually.be.true;
@@ -111,13 +123,16 @@ describe('CafeTownSend Create Employee Page', () => {
 				});
 
 				describe('When email is not entered', () => {
+
 					before(() => {
 						LandingPage.inputEmail.click();
 						LandingPage.addButton.click();
 					});
+
 					it('should display the required field validation when email is not entered', () => {
 						expect(AssertHelper.assertClass(LandingPage.inputEmail, CSS_INVALID)).to.eventually.be.true;
 					});
+
 					it('should not display required field validation when email is entered', () => {
 						LandingPage.inputEmail.sendKeys(TestData.create.email);
 						expect(AssertHelper.assertClass(LandingPage.inputEmail, CSS_VALID)).to.eventually.be.true;
@@ -141,5 +156,4 @@ describe('CafeTownSend Create Employee Page', () => {
 			});
 		});
 	});
-
 });

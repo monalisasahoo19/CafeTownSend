@@ -1,4 +1,3 @@
-
 // You could avoid this by specifying all the test in conf.js like specs: ['tests/specs/*.js']
 // The advantage of having this as separate file are
 //		1.More control of running the scripts in order
@@ -8,11 +7,11 @@ importTest = (name, path) => {
 	describe(name, () => {
 		require(path);
 	});
-}
-
+};
 
 describe("CafeTownSend Functional Tests", function () {
-	before(function () {
+
+	before(() => {
 		console.log("Starting the tests");
 	});
 
@@ -22,7 +21,8 @@ describe("CafeTownSend Functional Tests", function () {
 	importTest("Edit Employee", './tests/specs/editEmployeeSpec');
 	importTest("Delete Employee", './tests/specs/deleteEmployeeSpec');
 
-	after(function () {
+	after(() => {
 		console.log("After all the tests");
 	});
+
 });

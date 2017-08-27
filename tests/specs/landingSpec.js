@@ -25,6 +25,7 @@ describe('CafeTownSend Landing Page', () => {
 		});
 
 		describe('When the top banner is displayed', () => {
+			//Validates the top banner elements
 			CommonAssertions.assertTopBanner();
 		});
 
@@ -63,7 +64,5 @@ describe('CafeTownSend Landing Page', () => {
 		it('should "Delete" button be disabled', () => {
 			expect(AssertHelper.assertClass(LandingPage.deleteButton, 'disabled')).to.eventually.be.true;
 		});
-
 	});
-
 });

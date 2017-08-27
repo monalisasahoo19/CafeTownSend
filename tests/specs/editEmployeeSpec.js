@@ -24,9 +24,9 @@ describe('CafeTownSend Edit Employee Page', () => {
 		});
 
 		describe('When the top banner is displayed', () => {
+			//Validates the top banner elements
 			CommonAssertions.assertTopBanner();
 		});
-
 
 		describe('When user clicks on the edit button', () => {
 
@@ -48,7 +48,6 @@ describe('CafeTownSend Edit Employee Page', () => {
 				expect(LandingPage.backButton.getText()).to.eventually.equal('Back');
 			});
 
-
 			it('should display Update Button', () => {
 				expect(LandingPage.updateButtonFooter.getText()).to.eventually.equal('Update');
 			});
@@ -56,7 +55,6 @@ describe('CafeTownSend Edit Employee Page', () => {
 			it('should display Delete Button', () => {
 				expect(LandingPage.deleteButtonFooter.getText()).to.eventually.equal('Delete');
 			});
-
 
 			describe('When user clicks on the update button', () => {
 
@@ -87,19 +85,11 @@ describe('CafeTownSend Edit Employee Page', () => {
 				});
 
 				it('should display the pop up message', () => {
-
-					var alertDialog = browser.switchTo().alert();
-
-					console.log(currentEmployeeFullName);
-
+					let alertDialog = browser.switchTo().alert();
 					expect(alertDialog.getText()).to.eventually.equal('Are you sure you want to delete '+currentEmployeeFullName+'?');
-
 					alertDialog.accept();
 				});
-
 			});
-
 		});
 	});
-
 });
