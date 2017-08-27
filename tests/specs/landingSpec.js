@@ -13,7 +13,7 @@ describe('CafeTownSend Landing Page', () => {
 	describe('Given the user is logged in and on the landing Page', () => {
 
 		before(() => {
-			return LoginAction.login();
+			return LoginAction.initLogin();
 		});
 
 		before(() => {
@@ -24,7 +24,7 @@ describe('CafeTownSend Landing Page', () => {
 			return LandingPage.logoutButton.click();
 		});
 
-		it('should display the "Hello username" message on successful login ', () => {
+		it('should display the "Hello username" message on successful initLogin ', () => {
 			expect(LandingPage.helloMessage.getText()).to.eventually.equal('Hello ' + TestData.login.validCredentials.userName);
 		});
 		it('should display the logout button', () => {

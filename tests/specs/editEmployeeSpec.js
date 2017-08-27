@@ -12,7 +12,7 @@ describe('CafeTownSend Edit Employee Page', () => {
 	describe('Given the user is logged in and on the landing Page', () => {
 
 		before(() => {
-			return LoginAction.login();
+			return LoginAction.initLogin();
 		});
 
 		before(() => {
