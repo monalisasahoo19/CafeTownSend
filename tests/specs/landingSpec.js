@@ -23,7 +23,7 @@ describe('CafeTownSend Landing Page', () => {
 			return LandingPage.logoutButton.click();
 		});
 
-		it('should display the "Hello username" message on successful initLogin ', () => {
+		it('should display the "Hello username" message on successful Login ', () => {
 			expect(LandingPage.helloMessage.getText()).to.eventually.equal('Hello ' + TestData.login.validCredentials.userName);
 		});
 		it('should display the logout button', () => {

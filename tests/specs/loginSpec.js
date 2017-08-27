@@ -11,7 +11,7 @@ const LoginAction = require('../actions/loginAction');
 const CSS_INVALID = 'ng-invalid';
 const CSS_VALID = 'ng-valid';
 
-describe('CafeTownSend Login', () => {
+describe.only('CafeTownSend Login', () => {
 
 	describe('Given CafeTownSend Login Page', () => {
 		let loginPage;
@@ -22,7 +22,7 @@ describe('CafeTownSend Login', () => {
 
 		describe('When the Login page is loaded', () => {
 			it('should display the title as "CafeTownsend-AngularJS-Rails"', () => {
-				expect(loginPage.getTitle).to.eventually.equal('CafeTownsend-AngularJS-Rails');
+				expect(browser.getTitle).to.eventually.equal('CafeTownsend-AngularJS-Rails');
 			});
 			it('should display the banner with a background asset', () => {
 
@@ -41,7 +41,7 @@ describe('CafeTownSend Login', () => {
 				expect(LoginPage.labelPassword.getText()).to.eventually.equal('Password*');
 			});
 
-			it('should display the initLogin button', () => {
+			it('should display the Login button', () => {
 				expect(LoginPage.btnLogin.getText()).to.eventually.equal('Login');
 			});
 
@@ -96,13 +96,13 @@ describe('CafeTownSend Login', () => {
 				});
 			});
 
-			describe('When user clicks on the initLogin button with invalid credentials', () => {
+			describe('When user clicks on the Login button with invalid credentials', () => {
 
 				before(() => {
 					LoginAction.loginWithInvalidCredentials();
 				});
 
-				it('should display the "Invalid username or password" message on initLogin failure', () => {
+				it('should display the "Invalid username or password" message on Login failure', () => {
 					expect(LoginPage.headerErrorMessage.getText()).to.eventually.equal('Invalid username or password!');
 				});
 
@@ -111,7 +111,7 @@ describe('CafeTownSend Login', () => {
 				});
 			});
 
-			describe('When user clicks on the initLogin button with valid credentials', () => {
+			describe('When user clicks on the Login button with valid credentials', () => {
 
 				before(() => {
 					LoginAction.loginWithValidCredentials();
@@ -121,7 +121,7 @@ describe('CafeTownSend Login', () => {
 					return LandingPage.helloMessage.isPresent();
 				});
 
-				it('should display the "Hello username" message on successful initLogin', () => {
+				it('should display the "Hello username" message on successful Login', () => {
 					expect(LandingPage.helloMessage.getText()).to.eventually.equal('Hello ' + TestData.login.validCredentials.userName);
 				});
 
