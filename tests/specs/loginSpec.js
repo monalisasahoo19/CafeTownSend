@@ -5,8 +5,12 @@ chai.use(chaiAsPromised);
 const LoginPage = require('../pageObjects/loginPage');
 const LandingPage = require('../pageObjects/landingPage');
 const TestData = require('../testData/testData.json');
+const AssertHelper = require('../common/PageHelper');
 
-describe('CafeTownSend Login', () => {
+const CSS_INVALID = 'ng-invalid';
+const CSS_VALID = 'ng-valid';
+
+describe.only('CafeTownSend Login', () => {
 
 	describe('Given CafeTownSend Login Page', () => {
 		let loginPage;
@@ -41,18 +45,15 @@ describe('CafeTownSend Login', () => {
 						LoginPage.inputUsername.click();
 					});
 					it('should highlight the userName input field as required', () => {
-						LoginPage.inputUsername.getAttribute('class').then((cls) => {
-							expect(cls).to.include('ng-invalid');
-						});
+						expect(AssertHelper.assertClass(LoginPage.inputUsername, CSS_INVALID)).to.eventually.be.true;
+
 					});
 					describe('When user enters any value', () => {
 						before(() => {
 							LoginPage.inputUsername.sendKeys('User Name');
 						});
 						it('should disappear the highlight ', () => {
-							LoginPage.inputUsername.getAttribute('class').then((cls) => {
-								expect(cls).to.include('ng-valid');
-							});
+							expect(AssertHelper.assertClass(LoginPage.inputUsername, CSS_VALID)).to.eventually.be.true;
 						});
 					});
 				});
@@ -62,20 +63,17 @@ describe('CafeTownSend Login', () => {
 						LoginPage.inputPassword.click();
 					});
 					it('should highlight the password input field as required', () => {
-						LoginPage.inputPassword.getAttribute('class').then((cls) => {
-							console.log(cls);
-							expect(cls).to.include('ng-invalid');
-						});
+						expect(AssertHelper.assertClass(LoginPage.inputPassword, CSS_INVALID)).to.eventually.be.true;
+
 					});
 					describe('When user enters any value', () => {
 						before(() => {
 							LoginPage.inputPassword.sendKeys('Password');
 						});
 						it('should disappear the highlight ', () => {
-							LoginPage.inputPassword.getAttribute('class').then((cls) => {
-								expect(cls).to.include('ng-valid');
-							});
+							expect(AssertHelper.assertClass(LoginPage.inputPassword, CSS_VALID)).to.eventually.be.true;
 						});
+
 					});
 				});
 
