@@ -4,8 +4,19 @@
 
 Functional automation testing of [cafeTOWNSEND] website.
 
+### How to run the tests ! ###
+ - Clone the repo
+ - Run npm update in the same directory as your package.json file
+ - Start the Web driver
+ - Run the protractor functional test
+```sh
+$ npm update
+$ webdriver-manager start
+$ protractor conf.js
+```
+ 
 The test report generated from the scripts of this repo can be found at the link - [cafeTOWNSENDReport]
-# Techology Stack for Automation !
+### Techology Stack for Automation ! ###
   - JavaScript with ES6 syntax
   - NodeJS
   - Selenium
