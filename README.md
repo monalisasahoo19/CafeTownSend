@@ -4,7 +4,7 @@
 
 Functional automation testing of [cafeTOWNSEND] website.
 
-### How to run the tests ! ###
+### How to run the tests ? ###
  - Clone the repo
  - Run npm update in the same directory as your package.json file
  - Start the Web driver
